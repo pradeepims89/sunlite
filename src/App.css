@@ -1,6 +1,18 @@
 .App {
   text-align: center;
 }
+.Selected
+{
+  color: red;
+}
+.bg-primary
+{
+  color: white;
+}
+.Completed
+{
+  text-decoration: line-through;
+}
 /* 
 .App-logo {
   height: 40vmin;
