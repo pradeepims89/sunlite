@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import AddTolist from './AddTolist'
 import TodoItems from './TodoItems'
+import  axios from 'axios'
+import Firstname1,{Lastname, MidleName} from '../../ImportExport/Import'
+import { Last } from 'react-bootstrap/esm/PageItem'
 export default class ToDoList extends Component {
   constructor(props) {
     super(props)
@@ -81,12 +84,35 @@ export default class ToDoList extends Component {
       }
     )
   }
-
+  // componentDidMount()
+  // {
+  //     axios.get('https://jsonplaceholder.typicode.com/todos/2')
+  //     .then(function (response) {
+  //       console.log(response.data)
+  //       // handle success
+  //       //console.log(response.data.title);
+  //        this.setState({
+  //          todos:response.data
+  //        })
+  //        this.setState(
+  //         {
+  //           todos: response.data
+  //         }
+  //       )
+        
+  //     })
+  //     .catch(function (error) {
+  //       // handle error
+  //       console.log(error);
+  //     })
+  // }
   
   render() {
     return (
       <div>
-        My to List{this.state.todos.map((item, index) => {
+        My to List
+       {Firstname1} {MidleName}{Lastname}
+        {this.state.todos.map((item, index) => {
           return <TodoItems
             item={item}
             key={index}
