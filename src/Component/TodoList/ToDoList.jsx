@@ -4,6 +4,7 @@ import TodoItems from './TodoItems'
 import  axios from 'axios'
 import Firstname1,{Lastname, MidleName} from '../../ImportExport/Import'
 import { Last } from 'react-bootstrap/esm/PageItem'
+import LoadEmployee from '../Employee/LoadEmployee'
 export default class ToDoList extends Component {
   constructor(props) {
     super(props)
@@ -124,6 +125,7 @@ export default class ToDoList extends Component {
           </TodoItems>
         })}
         <AddTolist addTodoslist={this.addTodoslist}></AddTolist>
+        <LoadEmployee></LoadEmployee>
       </div>
     )
   }
