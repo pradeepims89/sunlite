@@ -1,8 +1,10 @@
 import React from 'react'
 import './userlogin.css'
 import avtar from './images/avatar.png'
+import { useState } from 'react'
 
 export default function UserLogin() {
+const [inputValues, setInputValues]=useState();
     return (
         <div >
          {/* <div className="text-center">

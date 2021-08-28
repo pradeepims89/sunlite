@@ -13,6 +13,11 @@
 {
   text-decoration: line-through;
 }
+.table>thead {
+  vertical-align: bottom;
+  background: #28ad98;
+  color: white;
+}
 /* 
 .App-logo {
   height: 40vmin;
