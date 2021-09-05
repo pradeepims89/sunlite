@@ -36,6 +36,12 @@ import  Usestate  from './Hooks/Usestate';
  import UserLogin from './Component/UserLogin';
  import  PageLifeCycle from './Component/LifeCycle/PageLifeCycle'
  import ToDoList from './Component/TodoList/ToDoList';
+ import Loader from './Component/Employee/Loader';
+
+ import { BeatLoader} from 'react-spinners'
+import Header from './Component/Employee/Header';
+import Footer from './Component/Employee/Footer'
+import Content from './Component/Employee/Content';
 function App() {
 
 
@@ -91,7 +97,12 @@ function App() {
    {/* <Routes></Routes> */}
    {/* <UserLogin></UserLogin> */}
    {/* <PageLifeCycle  name="pintu"></PageLifeCycle> */}
-   <ToDoList></ToDoList>
+   {/* <ToDoList></ToDoList> */}
+   {/* <Loader loading={true}></Loader> */}
+   {/* <BeatLoader  loading   size={150} /> */}
+   <Header></Header>
+   <Content></Content>
+   <Footer></Footer>
     </div>
   );
 }

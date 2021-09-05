@@ -1,93 +1,96 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect,useRef } from 'react'
 import axios from 'axios';
 import { Form,Table, Button, Card } from 'react-bootstrap'
 import AddEmployee from './AddEmployee';
 import { FaTrashAlt } from "react-icons/fa";
 import { FaRegEdit } from "react-icons/fa";
-import Modal from 'react-modal';
-Modal.setAppElement("#root")
-const customStyles = {
-    
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      minWidth:'40%'
-      
-    },
-    overlay:{
-        backgroundColor: 'gray'
-    }
-  };
+// import Modal from 'react-modal';
+import EditEmployeeModel from './EditEmployeeModel';
+import   {BeatLoader, BounceLoader, ScaleLoader} from 'react-spinners'
+
+
+ 
 export default function LoadEmployee() {
+    const formInputs = {
+        Id: '',
+        FirstName:'',
+        Gender: '',
+        Salary: ''
+    }
+    const [loading, setLoading] = useState(true);
+    const [color, setColor] = useState('blue');
     const [modelIsOpen, setmodelIsOpen] = useState(false)
-    const [data, setData] = useState([]);
+    const [gridData, setData] = useState([]);
+    const [updateRow, setupdateRow] = useState([]);
     const fetchData = async () => {
         await axios.get('http://my.devpradip.in/api/Employees').then((response) => {
             const Mydata = response.data;
             setData(Mydata);
+            setLoading(false);
         });
 
     };
-    useEffect(() => fetchData(), [data]);
+    const override =`
+    display: block;
+    margin: 0 auto;
+    border-color: red;
+  `;
+     useEffect(() => fetchData(), []);//load data  in grid.
+
     const deleteEmployee = async (id) => {
         const URL = 'http://my.devpradip.in/api/Employees'
         await axios.delete(`${URL}/${id}`).then(response => {
-            const del = data.filter(employee => id !== employee.id)
+            //const del = gridData.filter(employee => id !== employee.id)
             //setEmployees(del)
-            setData(del);
+            //setData(del);
+            fetchData();
         })
 
     }
+
     const OpenEditEmployeeModel=(IsOpen,id)=>
     {
-       setmodelIsOpen(IsOpen)
-       console.log(id);
+        
+        const newRow=gridData.filter((item, index)=>{
+          if(item.ID===id)
+          {
+              return item;
+          }
+          
+        });
+        setupdateRow(newRow);
+       
+    //     console.log(id)
+   
+      setmodelIsOpen(IsOpen)
+    }
+    const CloseEditEmployeeModel=(IsOpen)=>
+    {
+    setmodelIsOpen(IsOpen)
     }
     return (
-        <div className="row">
-            <div className="col-lg-4 ">
+        loading ? (
+            <div className="sweet-loading">
+                {console.log(' loading part....... ')}
+            <ScaleLoader  loading={loading} color={color} css={override} size={150}  ></ScaleLoader>
+            </div>
+        )
+        :(
+        <div>
+            {console.log('Data loading grid')}
+            {/* <div className="col-lg-4">
                 <AddEmployee>
                 </AddEmployee>
-            </div>
-            <div className="col-lg-8 text-center">
-                <Modal isOpen={modelIsOpen} 
-                 style={customStyles} >
-                <div className="modal-header">
-                    <h5 className="modal-title">Edit Employee</h5>
-                    <button type="button" className="close" onClick={()=>setmodelIsOpen(false)}  aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                    
-                </div>
-                <div className="modal-body">
-                    <form  >
-                        <Form.Control size="sm" type="text" placeholder="First Name"
-                             name="fname" />
-                        <br />
-                        <Form.Control size="sm" type="text" placeholder="Last Name"
-                              name="lname" />
-                        <br />
-                        <Form.Control size="sm" type="text" placeholder="Gender text"
-                            name="gender"  />
-                        <br />
-                        <Form.Control size="sm" type="text" placeholder="Salay"
-                            name="salary"  />
-                        <br />
-                       
-                    </form>
-              
-            </div>
-            <div className="modal-footer">
-            <Button type="submit" variant="success" >Save</Button >&nbsp;
-             <Button variant="secondary"  onClick={()=>setmodelIsOpen(false)}   >Clear</Button >
-            </div>  
-                </Modal>
-                <Card style={{ width: '50rem' }}>
+            </div> */}
+            <div >
+                 <EditEmployeeModel 
+                   updateRow={updateRow}
+                  CloseEditEmployeeModel={CloseEditEmployeeModel}
+                  modelIsOpen={modelIsOpen}
+                 
+                  />
+                <Card >
                     <Card.Body>
                         <Card.Title>Employee List</Card.Title>
                         <Table striped bordered hover size="sm"  >
@@ -102,7 +105,7 @@ export default function LoadEmployee() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {data.map(item => (
+                                {gridData.map(item => (
                                     <tr key={item.ID}>
                                         <td >{item.ID} </td>
                                         <td >{item.FirstName} </td>
@@ -134,5 +137,6 @@ export default function LoadEmployee() {
                 </Card>
             </div>
         </div>
+        )
     )
 }

@@ -18,6 +18,9 @@
   background: #28ad98;
   color: white;
 }
+.bg-primary {
+  background-color: #28ad98!important;
+}
 /* 
 .App-logo {
   height: 40vmin;

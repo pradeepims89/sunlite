@@ -115,7 +115,7 @@ export default function AddEmployee() {
             gender: inputValue.gender,
             salary: inputValue.salary
         }
-        console.log(payloadData.FirstName);
+        //console.log(payloadData.FirstName);
         post(payloadData);
         toast.success('Employee add succesfully!', {
             position: "top-right",
