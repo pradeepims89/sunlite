@@ -42,6 +42,7 @@ import  Usestate  from './Hooks/Usestate';
 import Header from './Component/Employee/Header';
 import Footer from './Component/Employee/Footer'
 import Content from './Component/Employee/Content';
+import Navigatin from './Component/Employee/Navigatin';
 function App() {
 
 
@@ -100,9 +101,9 @@ function App() {
    {/* <ToDoList></ToDoList> */}
    {/* <Loader loading={true}></Loader> */}
    {/* <BeatLoader  loading   size={150} /> */}
-   <Header></Header>
-   <Content></Content>
-   <Footer></Footer>
+     <Router>
+     <Navigatin></Navigatin>
+   </Router>
     </div>
   );
 }

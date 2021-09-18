@@ -5,6 +5,7 @@ import { Form,Table, Button, Card } from 'react-bootstrap'
 import AddEmployee from './AddEmployee';
 import { FaTrashAlt } from "react-icons/fa";
 import { FaRegEdit } from "react-icons/fa";
+import API from '../../http-common.jsx'
 // import Modal from 'react-modal';
 import EditEmployeeModel from './EditEmployeeModel';
 import   {BeatLoader, BounceLoader, ScaleLoader} from 'react-spinners'
@@ -24,7 +25,7 @@ export default function LoadEmployee() {
     const [gridData, setData] = useState([]);
     const [updateRow, setupdateRow] = useState([]);
     const fetchData = async () => {
-        await axios.get('http://my.devpradip.in/api/Employees').then((response) => {
+        await  API.get(`/Employees`).then((response) => {
             const Mydata = response.data;
             setData(Mydata);
             setLoading(false);
@@ -39,8 +40,8 @@ export default function LoadEmployee() {
      useEffect(() => fetchData(), []);//load data  in grid.
 
     const deleteEmployee = async (id) => {
-        const URL = 'http://my.devpradip.in/api/Employees'
-        await axios.delete(`${URL}/${id}`).then(response => {
+        const URL = '/Employees'
+        await   API.delete(`${URL}/${id}`).then(response => {
             //const del = gridData.filter(employee => id !== employee.id)
             //setEmployees(del)
             //setData(del);
