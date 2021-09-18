@@ -35,7 +35,7 @@ const [inputValues, setInputValues]=useState();
                             </form>
                         </div>
                         <div className="modal-footer">
-                            <a href="#">Forgot Password ?</a>
+                            <a href="#">Forgot Password 1?</a>
                         </div>
                     </div>
                 </div>
